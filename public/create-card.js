@@ -50,7 +50,21 @@ function updateButtons() {
         createButton('next-btn', 'Далее', goNext);
     }
 }
+function loadCurrentUser() {
+    fetch('/api/current-user')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ошибка при получении данных пользователя');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        return {username:data.username,role:data.role}
 
+       
+      })
+      
+  }
 function createButton(id, text, onClickFunction) {
     const button = document.createElement('button');
     button.id = id;
@@ -68,38 +82,38 @@ function removeButtons() {
 function saveCard() {
     // Собираем данные из формы
     const cardData = {
-        subject: 'Пожар в жилом доме',
-        code: 'PH12345',
-        cardNumber: 'CN98765',
-        burnType: 'Полный',
-        fireDate: '2025-01-01',
-        populationType: 'Городское население',
-        fireDepartment: 'Пожарная часть №1',
-        business: 'true', // Преобразуем в строку или boolean, как нужно
-        ownership: 'Частная',
-        legalForm: 'ООО',
-        government: 'Государственный',
-        enterpriseType: 'Производственный',
-        fireObject: 'Здание',
-        fireConditions: 'Открытое пламя',
-        damage: 'Сгорело 50% здания',
-        victims: '5 человек',
-        evacuation: 'Да',
-        firefighting: 'Активное тушение',
-        environmentImpact: 'true', // Преобразуем в строку или boolean, как нужно
-        cause: 'Неосторожное обращение с огнем',
-        ignitionSource: 'Электрический прибор',
-        spreadCause: 'Вентиляционная система',
-        firefightingResponse: 'Пожарные прибыли через 10 минут',
-        prevention: 'Установлены дополнительные системы безопасности',
-        inspection: 'Пожарная инспекция проведена 01.01.2025',
-        equipment: 'true', // Преобразуем в строку или boolean, как нужно
-        training: 'true', // Преобразуем в строку или boolean, как нужно
-        responsiblePerson: 'Иванов И.И.',
-        organization: "ООО 'Риск-Групп'",
-        contact: '+7(123)456-78-90',
-        comments: 'Дополнительные меры безопасности предприняты.',
-        documents: 'document_01.pdf'
+        subject: document.getElementById('subject').value,
+        code: document.getElementById('code').value,
+        cardNumber: document.getElementById('card-number').value,
+        burnType: document.getElementById('burn-type').value,
+        fireDate: document.getElementById('fire-date').value,
+        populationType: document.getElementById('population-type').value,
+        fireDepartment: document.getElementById('fire-department').value,
+        business: document.getElementById('business').checked,
+        ownership: document.getElementById('ownership').value,
+        legalForm: document.getElementById('legal-form').value,
+        government: document.getElementById('government').value,
+        enterpriseType: document.getElementById('enterprise-type').value,
+        fireObject: document.getElementById('fire-object').value,
+        fireConditions: document.getElementById('fire-conditions').value,
+        damage: document.getElementById('damage').value,
+        victims: document.getElementById('victims').value,
+        evacuation: document.getElementById('evacuation').value,
+        firefighting: document.getElementById('firefighting').value,
+        environmentImpact: document.getElementById('environment-impact').checked,
+        cause: document.getElementById('cause').value,
+        ignitionSource: document.getElementById('ignition-source').value,
+        spreadCause: document.getElementById('spread-cause').value,
+        firefightingResponse: document.getElementById('firefighting-response').value,
+        prevention: document.getElementById('prevention').value,
+        inspection: document.getElementById('inspection').value,
+        equipment: document.getElementById('equipment').checked,
+        training: document.getElementById('training').checked,
+        responsiblePerson: document.getElementById('responsible-person').value,
+        organization: document.getElementById('organization').value,
+        contact: document.getElementById('contact').value,
+        comments: document.getElementById('comments').value,
+        documents: document.getElementById('documents').files[0] ? document.getElementById('documents').files[0].name : null
     }; // Пример с файлом
 
     
@@ -115,8 +129,16 @@ function saveCard() {
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Карточка успешно сохранена') {
-            // Показать уведомление или обновить интерфейс
+            console.log(loadCurrentUser());// Показать уведомление или обновить интерфейс
             document.getElementById('popup').style.display = 'block';
+            fetch('/api/notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  message: 'Создана новая карточка пожара ',
+                  user_id:1 ,
+                }),
+              });
         }
     })
     .catch(error => {

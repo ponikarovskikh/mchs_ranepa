@@ -8,25 +8,24 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Система МЧС</h1>
+    
+      <h1>Система 101</h1>
       <nav>
         <ul>
-         
-          <li><a href="#profile">Профиль</a></li>
+          <li><span id="current-user"></li>
+          <li><button id="adminButton"><a href="admin.html">Админ-панель</a></button></li>
+          
           <li><button id="logoutButton">Выйти</button></li>
+          <div id="notification-icon">
+            <img id="bell" src="bell-empty.png" alt="Уведомления" onclick="toggleNotificationsModal()" />
+            <span id="notification-count">0</span>
+          </div>
         </ul>
       </nav>
     </div>
   </header>
 
   <div class="main-content">
-    <aside id="user-info">
-      <h3>Информация о пользователе</h3>
-      <p><strong>Логин:</strong> <span id="username"></span></p>
-      <p><strong>Роль:</strong> <span id="role"></span></p>
-    </aside>
-
     <main>
       <div class="container">
         <section id="current-cards" class="card-section">
@@ -48,10 +47,7 @@
 
         </section>
 
-        <section id="profile" class="card-section">
-          <h2>Профиль пользователя</h2>
-          <button id="edit-profile" class="btn">Редактировать профиль</button>
-        </section>
+        
       </div>
     </main>
   </div>
@@ -79,6 +75,25 @@
               <!-- Данные заполняются динамически -->
           </tbody>
       </table>
+  </div>
+</div>
+<div id="notifications-modal" class="modal">
+  <div class="notifi-modal-content">
+    <h2>Уведомления</h2>
+    <ul id="notification-list">
+      <!-- Уведомления будут подгружаться сюда -->
+    </ul>
+    <button id='clearnotifi' onclick="clearNotifications()">Очистить уведомления</button>
+    <button onclick="toggleNotificationsModal()">Закрыть</button>
+  </div>
+</div>
+<div id="view-card-modal" class="modal">
+  <div class="modal-content">
+    <h2>Информация о пожаре</h2>
+    <table id="card-info-table">
+      <!-- Здесь будет заполняться таблица -->
+    </table>
+    <button onclick="closeViewCardModal()">Закрыть</button>
   </div>
 </div>
 </html>

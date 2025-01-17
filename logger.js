@@ -1,7 +1,6 @@
 // logger.js
 const sqlite3 = require('sqlite3').verbose();
 
-const session = require('express-session');
 const db = new sqlite3.Database('mchs.db');
 
 /**

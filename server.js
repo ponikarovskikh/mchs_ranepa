@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const logMessage = require('./logger');
 
 const app = express();
 const port = 3000;
@@ -15,11 +16,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json()); // Для обработки JSON данных
 
 // Настройка сессий
+
 app.use(session({
-  secret: 'your-secret-key', // Секретный ключ для сессий
+  secret: 'your-secret-key',  // Ваш секретный ключ для сессии
   resave: false,
   saveUninitialized: true,
+  cookie: { secure: false }  // Для разработки, в продакшене должен быть true с HTTPS
 }));
+
+
+
+
+
 
 // Маршрут для отображения страницы входа
 app.get('/login', (req, res) => {
@@ -29,6 +37,65 @@ app.get('/login', (req, res) => {
   }
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
+
+
+
+
+// Маршрут для выполнения логина
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+
+  console.log(`[INFO] Авторизация: запрос от пользователя ${username}`);
+
+  const query = 'SELECT ID, username, role FROM users WHERE username = ? AND password = ?';
+  db.get(query, [username, password], (err, user) => {
+      if (err) {
+          console.error('[ERROR] Ошибка базы данных:', err);
+          return res.status(500).json({ message: 'Ошибка базы данных' });
+      }
+
+      if (!user) {
+          console.warn(`[WARNING] Неверные данные для входа пользователя ${username}`);
+          return res.status(401).json({ message: 'Неверный логин или пароль' });
+      }
+
+      console.log(`[SUCCESS] Пользователь ${username} успешно найден в базе. Роль: ${user.role}`);
+
+      // Сохраняем пользователя в сессии
+      req.session.user = { id: user.ID, username: user.username, role: user.role };
+
+      // Отправляем роль пользователя клиенту
+      res.json({ role: user.role });
+  });
+});
+
+
+app.post('/api/logout', (req, res) => {
+  // Удаляем сессию
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Ошибка при завершении сессии' });
+    }
+
+    // После уничтожения сессии отправляем успешный ответ
+    res.clearCookie('connect.sid');  // Удаляем куки сессии
+    res.status(200).json({ message: 'Сессия завершена' });
+  });
+});
+
+// Получение текущего пользователя из сессии
+app.get('/api/current-user', (req, res) => {
+  console.log('curr',req.session.user );
+  if (req.session.user.username) {
+    console.log('curre: ', req.session.user.username );
+    res.json({ username: req.session.user.username,role:req.session.user.role});
+    
+  } else {
+    res.status(401).json({ error: 'Не авторизован' });
+  }
+});
+
+
 
 
 // Получение всех пользователей
@@ -152,7 +219,6 @@ app.get('/api/fire-cards/:id', (req, res) => {
     }
 
     res.json(row); 
-    console.error(res.json(row),'checkkkkk');
 
      // Возвращаем данные первой найденной карточки
   });
@@ -162,9 +228,10 @@ app.get('/api/fire-cards/:id', (req, res) => {
 
 app.delete('/api/fire-cards/:id', (req, res) => {
   const { id } = req.params;
-
+  console.log('del card',id);
   db.run('DELETE FROM fire_cards WHERE id = ?', [id], function (err) {
     if (err) {
+      
       return res.status(500).json({ error: err.message });
     }
     if (this.changes === 0) {
@@ -175,53 +242,24 @@ app.delete('/api/fire-cards/:id', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Маршрут для выполнения логина
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-
-  console.log(`[INFO] Авторизация: запрос от пользователя ${username}`);
-
-  const query = 'SELECT ID, username, role FROM users WHERE username = ? AND password = ?';
-  db.get(query, [username, password], (err, user) => {
+app.get('/api/system-logs', (req, res) => {
+  try {
+    // Выполнение SQL запроса для получения логов
+    db.all('SELECT * FROM system_logs ORDER BY timestamp DESC', (err, rows) => {
       if (err) {
-          console.error('[ERROR] Ошибка базы данных:', err);
-          return res.status(500).json({ message: 'Ошибка базы данных' });
+        console.error('Ошибка при получении логов из базы данных:', err);
+        return res.status(500).json({ error: 'Ошибка при получении логов' });
       }
 
-      if (!user) {
-          console.warn(`[WARNING] Неверные данные для входа пользователя ${username}`);
-          return res.status(401).json({ message: 'Неверный логин или пароль' });
-      }
+      console.log(1, rows); // Логируем данные
 
-      console.log(`[SUCCESS] Пользователь ${username} успешно найден в базе. Роль: ${user.role}`);
-
-      // Сохраняем пользователя в сессии
-      req.session.user = { id: user.ID, username: user.username, role: user.role };
-
-      // Отправляем роль пользователя клиенту
-      res.json({ role: user.role });
-  });
+      // Отправка логов в формате JSON
+      res.json(rows);
+    });
+  } catch (err) {
+    console.error('Ошибка при выполнении запроса:', err);
+    res.status(500).json({ error: 'Ошибка при получении логов' });
+  }
 });
 
 
@@ -233,38 +271,49 @@ app.get('/main', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'main.html'));
 });
 
-// Маршрут для выхода из системы
-app.post('/api/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send('Ошибка при выходе из системы');
+app.get('/api/notifications', (req, res) => {
+  db.all(
+    'SELECT * FROM notifications ORDER BY created_at DESC',
+    [],
+    (err, rows) => {
+      if (err) {
+        console.error(err.message);
+        return res.status(500).json({ error: 'Ошибка получения уведомлений' });
+      }
+      res.json(rows);
     }
-    res.status(200).send({ message: 'Вы вышли из системы' });
-  });
+  );
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.post('/api/notifications', (req, res) => {
+  const { message, user_id } = req.body;
+  db.run(
+    'INSERT INTO notifications (message, user_id) VALUES (?, ?)',
+    [message, user_id],
+    function (err) {
+      if (err) {
+        console.error(err.message);
+        return res.status(500).json({ error: 'Ошибка добавления уведомления' });
+      }
+      res.status(201).json({ id: this.lastID });
+    }
+  );
+});
+app.delete('/api/notifications', (req, res) => {
+  console.log('fuck');
+  db.run('DELETE FROM notifications', [], function (err) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ message: 'Уведомления очищены' });
+  });
+});
 
 // Запуск сервера
 app.listen(port, () => {
   console.log(`Сервер работает на порту ${port}`);
+  logMessage('INFO', 'Сервер запущен на порту 3000');
+
 });
 // закончил на отображение карточек пожара в дополнительном окне хотел сейчас спросить как правильно делать запрос к БД и почему он не сохраняется в ответ

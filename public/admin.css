@@ -1,185 +1,213 @@
 /* Основные стили для страницы */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eeeeee;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  margin: 0 auto;
+
+  background: linear-gradient(135deg, #e53935, #1f2782);
+  color: white;
+  display: flex;
+   /* Вертикальное выравнивание */
+  justify-content: space-between;
+  height: fit-content;
+}
+
+.header-left{
+  margin: 0 auto;
+  font-size: 12px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.header-right {
+  display: flex;
+  justify-content: end;  
+  width: 50%;
+
+}
+
+#current-user {
+align-items: center;
+  display: flex;
+  justify-self:center;
+  font-size: 16px;
+  color: #de6509;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+
+}
+
+nav ul li {
+  display: flex;
+  margin-right: 10px;
+
+
   
-  .container {
-    width: 80%;
-    margin: 0 auto;
-  }
-  
-  header {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-  }
-  
-  header h1 {
-    margin: 0;
-    text-align: center;
-  }
-  
-  nav ul {
-    list-style: none;
-    text-align: center;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 20px;
-  }
-  
-  nav ul li a,
-  nav ul li button {
-    color: white;
-    text-decoration: none;
-    background-color: #555;
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  nav ul li a:hover,
-  nav ul li button:hover {
-    background-color: #777;
-  }
-  
-  main {
-    padding: 20px 0;
-  }
-  
-  section {
-    margin-bottom: 40px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  #user-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #user-list li {
-    background-color: #fff;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  #user-list li button {
-    background-color: #e74c3c;
-    margin-left: 10px;
-  }
-  
-  #user-list li button:hover {
-    background-color: #c0392b;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-  }
-  
-  footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  footer p {
-    margin: 0;
-  }
-  
-  /* Стили для модального окна */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 5px;
-    width: 40%;
-  }
-  
-  .close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  form label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  form input,
-  form select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  form button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Стили для таблицы */
+}
+
+nav ul li a,
+nav ul li button {
+  color: white;
+  text-decoration: none;
+  background-color: #d15b0d;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+nav ul li a:hover,
+nav ul li button:hover {
+  background-color: #d52f05;
+}
+
+main {
+  padding: 20px 0;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #0a6e53;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d75e02;
+}
+
+#user-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#user-list li {
+  background-color: #fff;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#user-list li button {
+  background-color: #e74c3c;
+  margin-left: 10px;
+}
+
+#user-list li button:hover {
+  background-color: #c0392b;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+footer p {
+  margin: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.305);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 40%;
+}
+
+.close {
+  color: #9f0808;
+  font-size: 28px;
+  font-weight: bold;
+  position:inherit;
+  display: flex;
+  justify-self: flex-end;
+  top: 10px;
+  right: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+form input,
+form select {
+  width: calc(100% - 10px); 
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
 #user-table {
   width: 100%;
   border-collapse: collapse;
@@ -194,7 +222,7 @@ body {
 }
 
 #user-table th {
-  background-color: #4CAF50;
+  background-color: #4659a3;
   color: white;
   font-weight: bold;
 }
@@ -223,19 +251,4 @@ body {
 #user-table td input[type="checkbox"] {
   transform: scale(1.2);
   cursor: pointer;
-}
-
-/* Упрощение кнопок и общего интерфейса */
-button {
-  margin: 10px 0;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
 }
