@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Система МЧС - Главная</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Система МЧС</h1>
+      <nav>
+        <ul>
+         
+          <li><a href="#profile">Профиль</a></li>
+          <li><button id="logoutButton">Выйти</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <aside id="user-info">
+      <h3>Информация о пользователе</h3>
+      <p><strong>Логин:</strong> <span id="username"></span></p>
+      <p><strong>Роль:</strong> <span id="role"></span></p>
+    </aside>
+
+    <main>
+      <div class="container">
+        <section id="current-cards" class="card-section">
+          <h2>Текущие карточки пожара</h2>
+          <button id="refresh-cards" class="btn">Обновить список</button>
+          <ul id="fire-card-list">
+            <!-- Здесь будут отображаться карточки из БД -->
+          </ul>
+          <!-- Модальное окно -->
+
+          <button onclick="window.location.href='create_card.html';" class="btn btn-primary">Создать карточку</button>
+
+        </section>
+
+      
+        <section id="fire-map" class="card-section">
+          <h2>Карта пожаров</h2>
+          <iframe src="https://maps.greenpeace.org/gpfire/?lang=ru" width="100%" height="600" style="border:none;"></iframe>
+
+        </section>
+
+        <section id="profile" class="card-section">
+          <h2>Профиль пользователя</h2>
+          <button id="edit-profile" class="btn">Редактировать профиль</button>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Система МЧС</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+<div id="modal" class="modal">
+  <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Детали карточки пожара</h2>
+      <table id="card-details-table">
+          <thead>
+              <tr>
+                  <th>Пояснение</th>
+                  <th>Значение</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Данные заполняются динамически -->
+          </tbody>
+      </table>
+  </div>
+</div>
+</html>

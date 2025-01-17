@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заполнение карточки пожара</title>
+    <link rel="stylesheet" href="create-card.css">
+</head>
+<header>
+  <div class="container">
+    <h1>Система 101</h1>
+    <nav>
+      <ul>
+        <li><a href="#current-cards">Текущие карточки</a></li>
+        <li><a href="#new-card">Создать карточку</a></li>
+        <li><a href="#profile">Профиль</a></li>
+        <li><button id="logout">Выйти</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<body>
+    <div class="form-container">
+        <h1>Заполнение карточки пожара</h1>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+      </div>
+        
+        <!-- Этап 1 -->
+        <div class="step" id="step-1">
+            <h2>Этап 1: Общие сведения</h2>
+            <form>
+                <label for="subject">Субъект Российской Федерации:</label>
+                <input type="text" id="subject" name="subject">
+                
+                <label for="code">Код органа (района, населённого пункта):</label>
+                <input type="text" id="code" name="code">
+                
+                <label for="card-number">Номер карточки:</label>
+                <input type="text" id="card-number" name="card-number">
+                
+                <label for="burn-type">Тип горения:</label>
+                <select id="burn-type" name="burn-type">
+                    <option value="open">Открытое горение</option>
+                    <option value="smoldering">Тление</option>
+                    <option value="explosion">Взрыв</option>
+                </select>
+
+                <label for="fire-date">Дата возникновения пожара (ДД.ММ.ГГГГ):</label>
+                <input type="date" id="fire-date" name="fire-date">
+                
+                <label for="population-type">Вид населённого пункта:</label>
+                <select id="population-type" name="population-type">
+                    <option value="city">Город</option>
+                    <option value="town">Посёлок городского типа</option>
+                    <option value="village">Деревня</option>
+                    <option value="settlement">Село</option>
+                </select>
+                
+                <label for="fire-department">Пожарная охрана населённого пункта:</label>
+                <input type="text" id="fire-department" name="fire-department">
+            </form>
+        </div>
+
+        <!-- Этап 2 -->
+        <div class="step" id="step-2">
+            <h2>Этап 2: Объект пожара</h2>
+            <form>
+                <label for="business">Субъект малого и среднего предпринимательства:</label>
+                <input type="checkbox" id="business" name="business">
+                
+                <label for="ownership">Форма собственности:</label>
+                <select id="ownership" name="ownership">
+                    <option value="state">Государственная</option>
+                    <option value="municipal">Муниципальная</option>
+                    <option value="private">Частная</option>
+                    <option value="mixed">Смешанная</option>
+                    <option value="other">Иная</option>
+                </select>
+
+                <label for="legal-form">Организационно-правовая форма организации:</label>
+                <select id="legal-form" name="legal-form">
+                    <option value="AO">АО</option>
+                    <option value="OOO">ООО</option>
+                    <option value="GUP">ГУП</option>
+                    <option value="IP">ИП</option>
+                    <option value="non-profit">Некомерческая организация</option>
+                </select>
+
+                <label for="government">Орган государственной власти и управления:</label>
+                <select id="government" name="government">
+                    <option value="federal">Федеральные органы</option>
+                    <option value="regional">Органы субъектов РФ</option>
+                    <option value="municipal">Муниципальные органы</option>
+                </select>
+
+                <label for="enterprise-type">Тип предприятия, организации, учреждения:</label>
+                <select id="enterprise-type" name="enterprise-type">
+                    <option value="industry">Промышленные предприятия</option>
+                    <option value="residential">Жилые здания</option>
+                    <option value="education">Учреждения образования</option>
+                    <option value="healthcare">Здравоохранение</option>
+                    <option value="commerce">Торговля и складские объекты</option>
+                </select>
+
+                <label for="fire-object">Объект пожара:</label>
+                <select id="fire-object" name="fire-object">
+                    <option value="building">Здание</option>
+                    <option value="room">Помещение</option>
+                    <option value="vehicle">Транспортное средство</option>
+                    <option value="outdoor">Открытая территория</option>
+                </select>
+
+                <label for="fire-conditions">Условия пожара:</label>
+                <select id="fire-conditions" name="fire-conditions">
+                    <option value="indoor">В помещении</option>
+                    <option value="outdoor">На открытой территории</option>
+                    <option value="mixed">Комбинированные условия</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Этап 3 -->
+        <div class="step" id="step-3">
+            <h2>Этап 3: Последствия пожара</h2>
+            <form>
+                <label for="damage">Размер ущерба:</label>
+                <input type="text" id="damage" name="damage">
+                
+                <label for="victims">Количество пострадавших:</label>
+                <input type="number" id="victims" name="victims">
+                
+                <label for="evacuation">Количество эвакуированных:</label>
+                <input type="number" id="evacuation" name="evacuation">
+                
+                <label for="firefighting">Работы по ликвидации последствий:</label>
+                <textarea id="firefighting" name="firefighting"></textarea>
+
+                <label for="environment-impact">Воздействие на окружающую среду:</label>
+                <input type="checkbox" id="environment-impact" name="environment-impact">
+            </form>
+        </div>
+
+        <!-- Этап 4 -->
+        <div class="step" id="step-4">
+            <h2>Этап 4: Обстоятельства возникновения пожара</h2>
+            <form>
+                <label for="cause">Причина возникновения пожара:</label>
+                <select id="cause" name="cause">
+                    <option value="electrical">Короткое замыкание</option>
+                    <option value="human-error">Человеческий фактор</option>
+                    <option value="arson">Поджог</option>
+                    <option value="equipment-failure">Неисправность оборудования</option>
+                    <option value="other">Другая причина</option>
+                </select>
+
+                <label for="ignition-source">Источник возгорания:</label>
+                <input type="text" id="ignition-source" name="ignition-source">
+
+                <label for="spread-cause">Причина распространения пожара:</label>
+                <input type="text" id="spread-cause" name="spread-cause">
+                
+                <label for="firefighting-response">Реакция пожарных служб:</label>
+                <select id="firefighting-response" name="firefighting-response">
+                    <option value="quick">Быстрая</option>
+                    <option value="delayed">Задержка</option>
+                    <option value="insufficient">Недостаточная</option>
+                    <option value="none">Не была оказана</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Этап 5 -->
+        <div class="step" id="step-5">
+            <h2>Этап 5: Меры по предотвращению</h2>
+            <form>
+                <label for="prevention">Принятые меры по предотвращению:</label>
+                <textarea id="prevention" name="prevention"></textarea>
+
+                <label for="inspection">Пожарные инспекции:</label>
+                <input type="text" id="inspection" name="inspection">
+                
+                <label for="equipment">Наличие противопожарного оборудования:</label>
+                <input type="checkbox" id="equipment" name="equipment">
+                
+                <label for="training">Пожарные тренировки и обучение:</label>
+                <input type="checkbox" id="training" name="training">
+            </form>
+        </div>
+
+        <!-- Этап 6 -->
+        <div class="step" id="step-6">
+            <h2>Этап 6: Ответственные лица</h2>
+            <form>
+                <label for="responsible-person">Ответственное лицо:</label>
+                <input type="text" id="responsible-person" name="responsible-person">
+                
+                <label for="organization">Организация/Компания:</label>
+                <input type="text" id="organization" name="organization">
+                
+                <label for="contact">Контактные данные ответственного лица:</label>
+                <input type="text" id="contact" name="contact">
+            </form>
+        </div>
+
+        <!-- Этап 7 -->
+        <div class="step" id="step-7">
+            <h2>Этап 7: Прочее</h2>
+            <form>
+                <label for="comments">Комментарии и дополнительная информация:</label>
+                <textarea id="comments" name="comments"></textarea>
+                
+                <label for="documents">Загруженные документы:</label>
+                <input type="file" id="documents" name="documents">
+            </form>
+            <button id="save-card" onclick="saveCard()">Сохранить</button>
+        </div>
+        <div id="popup" class="popup">
+          <div class="popup-content">
+              <p>Карточка сохранена успешно!</p>
+              <button onclick="redirectToHome()">Ок</button>
+          </div>
+      </div>
+
+        <!-- Навигация -->
+      
+
+    <script src="create-card.js
+    "></script>
+</body>
+</html>

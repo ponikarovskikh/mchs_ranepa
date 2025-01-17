@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход в Систему-101</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="logo">
+      <img src="fireman.jpeg" alt="Логотип" />
+      <h1>Система-101</h1>
+    </div>
+    <form class="login-form" id="loginForm">
+      <label for="username">Логин</label>
+      <input type="text" id="username" name="username" placeholder="Введите логин" required>
+      
+      <label for="password">Пароль</label>
+      <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+      
+      <button type="submit">Войти</button>
+      <a href="#" class="forgot-password">Забыли пароль?</a>
+      
+      <!-- Здесь будет отображаться ошибка -->
+      <div id="error-message" class="error-message"></div>
+    </form>
+    <footer>
+      <p>&copy; 2024 Служба пожарной охраны. Версия 1.0</p>
+      <p>Техническая поддержка: support@firedept.ru</p>
+    </footer>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

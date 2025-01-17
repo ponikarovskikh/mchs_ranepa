@@ -1,0 +1,410 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #d82727;
+  margin: 0;
+  padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: #003366;
+  color: white;
+  padding: 20px 0;
+  box-shadow: 0 4px 8px rgba(150, 30, 30, 0.754);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffcc00;
+}
+
+nav ul li button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li button:hover {
+  background-color: #c9302c;
+}
+
+main {
+  flex-grow: 1;
+  padding: 40px 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.card-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.card-section button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-section button:hover {
+  background-color: #218838;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn-primary {
+  background-color: #0069d9;
+}
+
+footer {
+  background-color: #003366;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: fixed;
+  bottom: -100px; /* Изначально скрываем */
+  width: 100%;
+  left: 0;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  opacity: 0; /* Подвал скрыт */
+  z-index: 1000; /* Чтобы подвал был поверх контента */
+}
+
+footer.visible {
+  bottom: 0; /* Подвал отображается */
+  opacity: 1;
+}
+
+footer p {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .card-section {
+    padding: 15px;
+  }
+
+  .card-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .btn-primary {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+.form-container {
+  width: 80%;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #d45151;
+  width: 0%;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, select, textarea {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #e34c3e;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#saved-cards {
+  margin-top: 50px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#cards-list {
+  margin-top: 20px;
+}
+/* Стиль для всплывающего окна */
+/* Стиль для всплывающего окна */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+}
+
+.popup.active {
+  display: flex; /* Показываем попап */
+}
+
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+/* Основные стили для кнопок */
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Стили для кнопки "Далее" */
+#next-btn {
+  background-color: #28a745; /* Зеленый для продолжения */
+  color: white;
+}
+
+#next-btn:hover {
+  background-color: #218838;
+}
+
+#next-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Стили для кнопки "Назад" */
+#back-btn {
+  background-color: #e34c3e; /* Красный для возврата */
+  color: white;
+}
+
+#back-btn:hover {
+  background-color: #c9302c;
+}
+
+#back-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Стили для кнопки "Сохранить" на последнем шаге */
+#save-btn {
+  background-color: #007bff; /* Синий для сохранения */
+  color: white;
+}
+
+#save-btn:hover {
+  background-color: #0056b3;
+}
+
+#save-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Стили для навигации между шагами */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.navigation button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.navigation #next-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.navigation #back-btn {
+  background-color: #e34c3e;
+  color: white;
+}
+
+/* Применение стилей для кнопок на последнем этапе */
+.step-7 .navigation #next-btn {
+  display: none;
+}
+
+.step-7 .navigation #save-btn {
+  display: block;
+  background-color: #007bff; /* Синий для сохранения */
+}
+
+.step-7 .navigation #back-btn {
+  background-color: #e34c3e; /* Красный для возврата */
+}
